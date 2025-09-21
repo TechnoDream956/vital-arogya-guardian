@@ -15,14 +15,13 @@ const Chatbot = () => {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const apiKey = import.meta.env.GEMINI_API_KEY;
     console.log("API Key exists:", !!apiKey);
 
     if (!apiKey) {
       toast({
         title: "API Key Missing",
-        description:
-          "Please add VITE_GEMINI_API_KEY to your environment variables",
+        description: "Please add GEMINI_API_KEY to your environment variables",
         variant: "destructive",
       });
       return;
@@ -39,12 +38,11 @@ const Chatbot = () => {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       console.log("Sending request to Gemini...");
       const result = await model.generateContent(userMessage);
-      const response = await result.response;
-      const text = response.text();
+      const text = await result.text(); // await the promise correctly
       console.log("Gemini response:", text);
 
       setMessages((prev) => [...prev, { role: "bot", content: text }]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Gemini API Error:", error);
       toast({
         title: "Error",
@@ -52,7 +50,6 @@ const Chatbot = () => {
         variant: "destructive",
       });
 
-      // Add a fallback message so users know something went wrong
       setMessages((prev) => [
         ...prev,
         {
