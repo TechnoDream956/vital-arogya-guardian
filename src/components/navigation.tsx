@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Activity, Home, MessageCircle, Info, Shield } from "lucide-react";
+import {
+  Menu,
+  X,
+  Activity,
+  Home,
+  MessageCircle,
+  Info,
+  Shield,
+} from "lucide-react";
 import logoImage from "@/assets/arogya-logo.svg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageSelector } from "@/components/language-selector";
@@ -10,10 +18,10 @@ export function Navigation() {
   const { t } = useLanguage();
 
   const navItems = [
-    { label: t('nav.home'), href: "#home", icon: Home },
-    { label: t('nav.chat'), href: "#chat-section", icon: MessageCircle },
-    { label: t('nav.features'), href: "#features", icon: Activity },
-    { label: t('nav.about'), href: "#about", icon: Info },
+    { label: t("nav.home"), href: "#home", icon: Home },
+    { label: t("nav.chat"), href: "#chat-section", icon: MessageCircle },
+    { label: t("nav.features"), href: "#features", icon: Activity },
+    { label: t("nav.about"), href: "#about", icon: Info },
   ];
 
   return (
@@ -22,7 +30,11 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src={logoImage} alt="Arogya Raksha" className="w-8 h-8" />
+            <img
+              src="/arogya-logo.png"
+              alt="Arogya Raksha"
+              className="h-10 w-auto"
+            />
             <span className="text-xl font-bold text-gradient-primary">
               Arogya Raksha
             </span>
@@ -45,21 +57,25 @@ export function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageSelector />
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               <Shield className="w-4 h-4 mr-2" />
-              {t('footer.secure')}
+              {t("footer.secure")}
             </Button>
-            <Button 
+            <Button
               size="sm"
               className="gradient-primary shadow-primary"
-              onClick={() => document.getElementById('chat-section')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("chat-section")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             >
               <MessageCircle className="w-4 h-4 mr-2" />
-              {t('hero.cta')}
+              {t("hero.cta")}
             </Button>
           </div>
 
@@ -71,7 +87,11 @@ export function Navigation() {
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -92,22 +112,24 @@ export function Navigation() {
                 </a>
               ))}
               <div className="px-4 pt-4 space-y-2">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                 >
                   <Shield className="w-4 h-4 mr-2" />
-                  {t('footer.secure')} AI
+                  {t("footer.secure")} AI
                 </Button>
-                <Button 
+                <Button
                   className="w-full gradient-primary shadow-primary"
                   onClick={() => {
                     setIsOpen(false);
-                    document.getElementById('chat-section')?.scrollIntoView({ behavior: 'smooth' });
+                    document
+                      .getElementById("chat-section")
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
-                  {t('hero.cta')}
+                  {t("hero.cta")}
                 </Button>
               </div>
             </div>
