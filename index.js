@@ -1,15 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+const path = require("path");
+const fetch = require("node-fetch");
 const { ChatGoogleGenerativeAI } = require("langchain/chat_models");
 const { LLMChain, PromptTemplate } = require("langchain/chains");
-const fetch = require("node-fetch");
-const path = require("path");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // Use express built-in JSON parser
 
 const llm = new ChatGoogleGenerativeAI({
   model: "gemini-2.5-pro",
@@ -108,10 +107,11 @@ app.post("/health_query", async (req, res) => {
   }
 });
 
-// Serve static React frontend build
-const buildPath = path.join(__dirname, "dist"); // Adjust if your build folder differs
+// Serve React static build files
+const buildPath = path.join(__dirname, "dist");
 app.use(express.static(buildPath));
 
+// SPA fallback - serve index.html for any unknown route
 app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
