@@ -74,16 +74,20 @@ export function HealthChat() {
     setIsTyping(false);
   };
 
-  // Function calls backend API to get Gemini AI response securely
+  // Updated: Call backend /health_query with question
   const generateHealthResponse = async (message: string): Promise<string> => {
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch("/health_query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ question: message }),
       });
       const data = await res.json();
-      return data.answer;
+      return (
+        data.response ||
+        t("chat.error") ||
+        "Sorry, I couldn't get an answer right now."
+      );
     } catch {
       return t("chat.error") || "Sorry, I couldn't get an answer right now.";
     }
