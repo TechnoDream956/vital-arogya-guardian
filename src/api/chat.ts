@@ -2,7 +2,6 @@ import type { Request, Response } from "express";
 import { ChatGoogleGenerativeAI } from "langchain/chat_models";
 import { HumanMessage } from "@langchain/core/messages";
 
-// ✅ Use backend-only env var (no VITE_ prefix)
 const llm = new ChatGoogleGenerativeAI({
   model: "gemini-2.5-pro",
   apiKey: process.env.GEMINI_API_KEY,
@@ -17,16 +16,15 @@ export default async function handler(req: Request, res: Response) {
     }
 
     try {
-      // ✅ Correct LangChain message format
       const response = await llm.invoke([new HumanMessage(message)]);
-
       res.status(200).json({ answer: response.content });
     } catch (err: any) {
-      console.error("LLM error:", JSON.stringify(err, null, 2)); // log full error
+      console.error("LLM error full dump:", err);
 
+      // Ensure JSON always gets sent back
       res.status(500).json({
-        error: err.message || err.toString() || "AI processing error",
-        details: err.response || err, // include raw details
+        error: "AI processing error",
+        details: err?.message || String(err),
       });
     }
   } else {
