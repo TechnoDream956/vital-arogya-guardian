@@ -5,6 +5,7 @@ import { ChatMessage } from "@/components/ui/chat-message";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Message {
   id: string;
@@ -14,10 +15,11 @@ interface Message {
 }
 
 export function HealthChat() {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "नमस्ते! मैं Arogya Raksha हूं, आपका AI स्वास्थ्य सहायक। मैं केवल स्वास्थ्य संबंधी प्रश्नों का उत्तर देता हूं। आप मुझसे क्या पूछना चाहते हैं?",
+      content: t('chat.greeting'),
       isBot: true,
       timestamp: new Date().toLocaleTimeString(),
     },
@@ -58,7 +60,7 @@ export function HealthChat() {
         id: (Date.now() + 1).toString(),
         content: isHealthRelated 
           ? generateHealthResponse(inputValue)
-          : "मैं केवल स्वास्थ्य संबंधी प्रश्नों का उत्तर दे सकता हूं। कृपया कोई स्वास्थ्य संबंधी प्रश्न पूछें।",
+          : t('chat.non_health'),
         isBot: true,
         timestamp: new Date().toLocaleTimeString(),
       };
@@ -82,9 +84,9 @@ export function HealthChat() {
 
   const generateHealthResponse = (message: string): string => {
     const responses = [
-      "आपके स्वास्थ्य संबंधी प्रश्न के लिए धन्यवाद। कृपया ध्यान दें कि यह केवल सामान्य जानकारी है। गंभीर स्वास्थ्य समस्याओं के लिए डॉक्टर से सलाह लें।",
-      "स्वास्थ्य संबंधी जानकारी प्रदान करना मेरी प्राथमिकता है। हालांकि, व्यक्तिगत चिकित्सा सलाह के लिए योग्य चिकित्सक से संपर्क करें।",
-      "आपके स्वास्थ्य प्रश्न महत्वपूर्ण हैं। मैं सामान्य मार्गदर्शन प्रदान कर सकता हूं, लेकिन निदान और उपचार के लिए डॉक्टर से मिलें।"
+      t('chat.response1'),
+      t('chat.response2'),
+      t('chat.response3')
     ];
     
     return responses[Math.floor(Math.random() * responses.length)];
@@ -134,7 +136,7 @@ export function HealthChat() {
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="अपना स्वास्थ्य प्रश्न यहाँ लिखें..."
+            placeholder={t('chat.placeholder')}
             onKeyPress={(e) => e.key === "Enter" && handleSend()}
             className="flex-1 bg-background border-border"
           />
@@ -148,7 +150,7 @@ export function HealthChat() {
           </Button>
         </div>
         <p className="text-xs text-muted-foreground mt-2 text-center">
-          Arogya Raksha केवल स्वास्थ्य संबंधी प्रश्नों का उत्तर देता है
+          {t('chat.disclaimer')}
         </p>
       </div>
     </div>

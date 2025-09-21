@@ -2,15 +2,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Activity, Home, MessageCircle, Info, Shield } from "lucide-react";
 import logoImage from "@/assets/arogya-logo.svg";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSelector } from "@/components/language-selector";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navItems = [
-    { label: "होम", href: "#home", icon: Home },
-    { label: "चैट", href: "#chat-section", icon: MessageCircle },
-    { label: "विशेषताएं", href: "#features", icon: Activity },
-    { label: "जानकारी", href: "#about", icon: Info },
+    { label: t('nav.home'), href: "#home", icon: Home },
+    { label: t('nav.chat'), href: "#chat-section", icon: MessageCircle },
+    { label: t('nav.features'), href: "#features", icon: Activity },
+    { label: t('nav.about'), href: "#about", icon: Info },
   ];
 
   return (
@@ -41,13 +44,14 @@ export function Navigation() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSelector />
             <Button 
               variant="outline" 
               size="sm"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               <Shield className="w-4 h-4 mr-2" />
-              सुरक्षित
+              {t('footer.secure')}
             </Button>
             <Button 
               size="sm"
@@ -55,19 +59,21 @@ export function Navigation() {
               onClick={() => document.getElementById('chat-section')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <MessageCircle className="w-4 h-4 mr-2" />
-              चैट शुरू करें
+              {t('hero.cta')}
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageSelector />
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -91,7 +97,7 @@ export function Navigation() {
                   className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                 >
                   <Shield className="w-4 h-4 mr-2" />
-                  सुरक्षित AI
+                  {t('footer.secure')} AI
                 </Button>
                 <Button 
                   className="w-full gradient-primary shadow-primary"
@@ -101,7 +107,7 @@ export function Navigation() {
                   }}
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
-                  चैट शुरू करें
+                  {t('hero.cta')}
                 </Button>
               </div>
             </div>

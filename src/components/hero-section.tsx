@@ -3,8 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { Activity, Shield, Clock, Globe } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 import logoImage from "@/assets/arogya-logo.svg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function HeroSection() {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -42,23 +45,18 @@ export function HeroSection() {
         {/* Badge */}
         <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm shadow-medical">
           <Activity className="w-4 h-4 mr-2" />
-          24/7 AI स्वास्थ्य सहायक
+          {t('hero.badge')}
         </Badge>
 
         {/* Heading */}
         <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-          <span className="text-gradient-primary">Arogya</span>{" "}
-          <span className="text-gradient-medical">Raksha</span>
+          <span className="text-gradient-primary">{t('hero.title')}</span><br />
+          <span className="text-gradient-medical">{t('hero.subtitle')}</span>
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          आपका विश्वसनीय AI स्वास्थ्य सहायक
-        </p>
-
-        <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.4s" }}>
-          24/7 उपलब्ध, बहुभाषी समर्थन के साथ विश्वसनीय स्वास्थ्य जानकारी और मार्गदर्शन प्राप्त करें। 
-          केवल स्वास्थ्य संबंधी प्रश्नों के लिए डिज़ाइन किया गया।
+        {/* Description */}
+        <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          {t('hero.description')}
         </p>
 
         {/* CTA Buttons */}
@@ -69,7 +67,7 @@ export function HeroSection() {
             onClick={() => document.getElementById('chat-section')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <Activity className="w-5 h-5 mr-2" />
-            चैट शुरू करें
+            {t('hero.cta')}
           </Button>
           <Button 
             size="lg" 
@@ -77,7 +75,7 @@ export function HeroSection() {
             className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 px-8 py-6 text-lg"
           >
             <Shield className="w-5 h-5 mr-2" />
-            और जानें
+            {t('nav.about')}
           </Button>
         </div>
 
@@ -85,15 +83,15 @@ export function HeroSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: "0.8s" }}>
           <div className="flex items-center justify-center gap-3 p-4 bg-card/30 backdrop-blur-md rounded-xl border shadow-medical">
             <Clock className="w-6 h-6 text-primary" />
-            <span className="text-sm font-medium">24/7 उपलब्ध</span>
+            <span className="text-sm font-medium">{t('features.available.title')}</span>
           </div>
           <div className="flex items-center justify-center gap-3 p-4 bg-card/30 backdrop-blur-md rounded-xl border shadow-medical">
             <Globe className="w-6 h-6 text-medical-cyan" />
-            <span className="text-sm font-medium">बहुभाषी समर्थन</span>
+            <span className="text-sm font-medium">{t('features.multilingual.title')}</span>
           </div>
           <div className="flex items-center justify-center gap-3 p-4 bg-card/30 backdrop-blur-md rounded-xl border shadow-medical">
             <Shield className="w-6 h-6 text-success" />
-            <span className="text-sm font-medium">विश्वसनीय जानकारी</span>
+            <span className="text-sm font-medium">{t('features.reliable.title')}</span>
           </div>
         </div>
       </div>
