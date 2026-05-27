@@ -8,6 +8,15 @@ export default async function handler(req, res) {
   try {
     const { message, language } = req.body;
 
+const langMap = {
+  en: 'English',
+  hi: 'Hindi',
+  od: 'Odia',
+  bn: 'Bengali'
+};
+
+const selectedLanguage = langMap[language] || 'English';
+
     if (!message) {
       return res.status(400).json({
         error: 'Message is required'
@@ -34,7 +43,15 @@ You are Arogya Raksha, a trusted AI health assistant for India.
 
 RULES:
 1. ONLY answer health and wellness questions.
-2. Reply in the user's language.
+2. Respond STRICTLY in this language:
+${selectedLanguage}
+
+Rules:
+- English → ONLY English
+- Hindi → ONLY Hindi
+- Odia → ONLY Odia
+- Bengali → ONLY Bengali
+- Never mix languages
 3. Keep answers simple and concise.
 4. Never mention AI companies.
 5. End with:
