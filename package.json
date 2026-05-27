@@ -1,12 +1,10 @@
 {
   "name": "arogya-raksha",
   "version": "1.0.0",
-  "description": "AI-powered health assistant for India — multilingual, 24/7",
+  "description": "AI-powered health assistant for India",
   "author": "Arpit Sehrawat",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "node server.js",
     "start": "node server.js"
   },
   "dependencies": {
