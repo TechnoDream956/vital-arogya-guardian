@@ -1,9 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -25,11 +24,7 @@ app.post('/api/health-query', async (req, res) => {
       });
     }
 
-    if (!process.env.GROQ_API_KEY) {
-      return res.status(500).json({
-        error: 'Missing GROQ_API_KEY'
-      });
-    }
+    console.log('Incoming question:', message);
 
     const response = await fetch(
       'https://api.groq.com/openai/v1/chat/completions',
@@ -37,7 +32,7 @@ app.post('/api/health-query', async (req, res) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`
         },
         body: JSON.stringify({
           model: 'llama-3.3-70b-versatile',
@@ -50,12 +45,12 @@ app.post('/api/health-query', async (req, res) => {
 You are Arogya Raksha, a trusted AI health assistant for India.
 
 RULES:
-1. ONLY answer health-related questions.
-2. Reply in the SAME language as the user.
-3. Keep answers simple and easy to understand.
-4. Be empathetic and supportive.
-5. Never mention AI companies or APIs.
-6. End with proper medical disclaimer.
+1. Only answer health-related questions.
+2. Reply in the user's language.
+3. Keep answers simple.
+4. Be empathetic.
+5. Never mention AI companies.
+6. End with a medical disclaimer.
 `
             },
             {
@@ -78,7 +73,7 @@ RULES:
     }
 
     return res.status(500).json({
-      error: 'Invalid AI response',
+      error: 'Invalid Groq response',
       details: data
     });
 
