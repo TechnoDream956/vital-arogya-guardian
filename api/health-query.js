@@ -8,11 +8,31 @@ export default async function handler(req, res) {
   try {
     const { message, language } = req.body;
 
-const langMap = {
+cconst langMap = {
   en: 'English',
   hi: 'Hindi',
+  bn: 'Bengali',
   od: 'Odia',
-  bn: 'Bengali'
+  ta: 'Tamil',
+  te: 'Telugu',
+  mr: 'Marathi',
+  gu: 'Gujarati',
+  pa: 'Punjabi',
+  kn: 'Kannada',
+  ml: 'Malayalam',
+  as: 'Assamese',
+  ur: 'Urdu',
+  ne: 'Nepali',
+  kok: 'Konkani',
+  mai: 'Maithili',
+  sa: 'Sanskrit',
+  sd: 'Sindhi',
+  doi: 'Dogri',
+  mni: 'Manipuri',
+  sat: 'Santali',
+  ks: 'Kashmiri',
+  bho: 'Bhojpuri',
+  tcy: 'Tulu'
 };
 
 const selectedLanguage = langMap[language] || 'English';
@@ -52,9 +72,11 @@ Rules:
 - Odia → ONLY Odia
 - Bengali → ONLY Bengali
 - Never mix languages
-3. Keep answers simple and concise.
-4. Never mention AI companies.
-5. End with:
+3. Keep answers detailed but easy to understand.
+4. Use bullet points when useful.
+5. Explain symptoms, causes, prevention, and basic remedies when relevant.
+6. Never mention AI companies.
+7. End with:
 "This is general health information. Please consult a doctor for serious conditions."
 `
             },
