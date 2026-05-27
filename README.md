@@ -22,4 +22,5 @@ A health monitoring web application that tracks vitals and provides basic health
 ## Author
 
 **Arpit Sehrawat** — [@TechnoDream956](https://github.com/TechnoDream956)
+
 Bennett University | Cloud & Backend Developer
