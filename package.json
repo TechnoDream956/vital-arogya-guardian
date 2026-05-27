@@ -1,6 +1,7 @@
 {
   "name": "arogya-raksha",
   "version": "1.0.0",
+  "type": "module",
   "description": "AI-powered health assistant for India",
   "author": "Arpit Sehrawat",
   "private": true,
