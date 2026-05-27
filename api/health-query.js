@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
     const { message, language } = req.body;
 
-cconst langMap = {
+const langMap = {
   en: 'English',
   hi: 'Hindi',
   bn: 'Bengali',
