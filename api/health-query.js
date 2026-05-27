@@ -67,11 +67,8 @@ RULES:
 ${selectedLanguage}
 
 Rules:
-- English → ONLY English
-- Hindi → ONLY Hindi
-- Odia → ONLY Odia
-- Bengali → ONLY Bengali
 - Never mix languages
+- Use only the selected language
 3. Keep answers detailed but easy to understand.
 4. Use bullet points when useful.
 5. Explain symptoms, causes, prevention, and basic remedies when relevant.
